@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIFADHWI — Protéger les femmes et les enfants des Comores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #6D2E46;
+    --primary-light: #9B4A68;
+    --accent: #E8956D;
+    --accent-light: #F2B898;
+    --cream: #FAF4F0;
+    --cream-dark: #F0E6DF;
+    --dark: #1C1410;
+    --dark-mid: #3A2820;
+    --muted: #8C6E62;
+    --border: rgba(109, 46, 70, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--cream);
+    color: var(--dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ═══════════════════════════════
+     NAVBAR
+  ═══════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3.5rem;
+    background: rgba(250, 244, 240, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s ease;
+  }
+
+  nav.scrolled {
+    box-shadow: 0 2px 20px rgba(109, 46, 70, 0.08);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 32px;
+    height: 32px;
+    fill: var(--primary);
+  }
+
+  .nav-logo-text {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--dark-mid);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.25s ease;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--primary); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cream) !important;
+    background: var(--primary);
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.25s ease !important;
+  }
+
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--dark) !important; color: var(--cream) !important; }
+
+  /* ═══════════════════════════════
+     HERO
+  ═══════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 58% 42%;
+    padding-top: 90px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3.5rem 5rem 3.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+    font-weight: 600;
+    line-height: 1.18;
+    color: var(--primary);
+    margin-bottom: 1.8rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .btn-primary {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--primary);
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+
+  .btn-primary:hover { background: var(--dark); transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+  .btn-ghost .arrow { transition: transform 0.25s ease; }
+  .btn-ghost:hover .arrow { transform: translateX(4px); }
+
+  /* Hero right — decorative */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--primary);
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+  }
+
+  .hero-visual-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    z-index: 2;
+  }
+
+  .hero-big-word {
+    font-family: 'Lora', serif;
+    font-size: clamp(4rem, 9vw, 7.5rem);
+    font-weight: 700;
+    color: rgba(250, 244, 240, 0.08);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    display: block;
+  }
+
+  .hero-island-tag {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 1rem;
+  }
+
+  .hero-floats {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .float-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(232, 149, 109, 0.15);
+  }
+
+  .float-circle:nth-child(1) { width: 340px; height: 340px; top: -80px; right: -60px; }
+  .float-circle:nth-child(2) { width: 200px; height: 200px; bottom: 100px; left: 40px; background: rgba(250, 244, 240, 0.06); }
+  .float-circle:nth-child(3) { width: 120px; height: 120px; top: 50%; right: 80px; background: rgba(232, 149, 109, 0.1); }
+
+  .hero-quote-block {
+    position: relative;
+    z-index: 3;
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 0 1.5rem 1.8rem;
+  }
+
+  .hero-quote-text {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.9);
+    line-height: 1.65;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-quote-attr {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  /* ═══════════════════════════════
+     STATS — EDITORIAL SECTION
+  ═══════════════════════════════ */
+  #stats {
+    background: var(--cream-dark);
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #stats::before {
+    content: 'IMPACT';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Lora', serif;
+    font-size: clamp(8rem, 18vw, 16rem);
+    font-weight: 700;
+    color: rgba(109, 46, 70, 0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.1em;
+  }
+
+  .stats-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 0 2rem;
+  }
+
+  .stats-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .stats-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 500;
+    color: var(--primary);
+    font-style: italic;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-block {
+    padding: 2.5rem 2.5rem;
+    border-right: 1px solid rgba(109, 46, 70, 0.12);
+    position: relative;
+  }
+
+  .stat-block:last-child { border-right: none; }
+
+  .stat-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2.5rem;
+    right: 2.5rem;
+    height: 3px;
+    background: var(--cream-dark);
+    transition: background 0.4s ease;
+  }
+
+  .stat-block:hover::before { background: var(--accent); }
+
+  .stat-number {
+    font-family: 'Lora', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.1em;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.03em;
+    transition: color 0.3s ease;
+  }
+
+  .stat-block:hover .stat-number { color: var(--accent); }
+
+  .stat-suffix {
+    font-size: 0.45em;
+    color: var(--accent);
+    font-weight: 400;
+    font-style: italic;
+    align-self: flex-start;
+    margin-top: 0.4em;
+  }
+
+  .stat-context {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 200px;
+  }
+
+  .stat-context strong {
+    font-weight: 700;
+    color: var(--dark-mid);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.92rem;
+  }
+
+  /* ═══════════════════════════════
+     MISSION
+  ═══════════════════════════════ */
+  #mission {
+    padding: 7rem 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .mission-quote {
+    border-left: 4px solid var(--accent);
+    padding: 2rem 0 2rem 2.5rem;
+    position: relative;
+  }
+
+  .mission-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -1rem;
+    left: 1.5rem;
+    font-family: 'Lora', serif;
+    font-size: 6rem;
+    color: var(--accent-light);
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .mission-quote-text {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.3rem, 2vw, 1.65rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--primary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .mission-quote-attr {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .mission-content {}
+
+  .section-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+  }
+
+  .mission-values {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .mission-value {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--dark-mid);
+  }
+
+  .mission-value::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════
+     ACTIONS — STACKED ROWS
+  ═══════════════════════════════ */
+  #actions {
+    background: var(--dark);
+    padding: 6rem 3.5rem;
+  }
+
+  .actions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(250, 244, 240, 0.1);
+  }
+
+  .actions-title-group .section-eyebrow { color: var(--accent); }
+
+  .actions-title-group .section-title {
+    color: var(--cream);
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+  }
+
+  .actions-subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.45);
+    max-width: 280px;
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  .action-rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .action-row {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(250, 244, 240, 0.08);
+    cursor: pointer;
+    transition: background 0.3s ease;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0 -1rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .action-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: rgba(232, 149, 109, 0.06);
+    transition: width 0.4s ease;
+  }
+
+  .action-row:hover::before { width: 100%; }
+
+  .action-num {
+    font-family: 'Lora', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(250, 244, 240, 0.12);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    transition: color 0.35s ease;
+  }
+
+  .action-row:hover .action-num { color: var(--accent); }
+
+  .action-body {}
+
+  .action-tag {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(232, 149, 109, 0.12);
+    border: 1px solid rgba(232, 149, 109, 0.25);
+    padding: 0.2rem 0.7rem;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 0.7rem;
+  }
+
+  .action-name {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+    transition: color 0.25s ease;
+  }
+
+  .action-row:hover .action-name { color: var(--accent-light); }
+
+  .action-desc {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.45);
+    line-height: 1.6;
+    max-width: 420px;
+  }
+
+  .action-arrow {
+    font-size: 1.4rem;
+    color: rgba(250, 244, 240, 0.2);
+    transform: translateX(-8px);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .action-row:hover .action-arrow {
+    transform: translateX(0);
+    color: var(--accent);
+  }
+
+  /* ═══════════════════════════════
+     EMERGENCY
+  ═══════════════════════════════ */
+  #emergency {
+    background: var(--primary);
+    padding: 5rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #emergency::before {
+    content: 'SOS';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Lora', serif;
+    font-size: 18rem;
+    font-weight: 700;
+    color: rgba(250, 244, 240, 0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .emergency-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .emergency-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .emergency-pulse {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+    position: relative;
+    top: -2px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .emergency-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+
+  .emergency-sub {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.65);
+    margin-bottom: 3rem;
+    max-width: 560px;
+  }
+
+  .emergency-resources {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .resource-card {
+    background: rgba(250, 244, 240, 0.06);
+    border: 1px solid rgba(250, 244, 240, 0.12);
+    padding: 1.8rem;
+    border-radius: 2px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .resource-card:hover {
+    background: rgba(250, 244, 240, 0.1);
+    border-color: rgba(232, 149, 109, 0.4);
+  }
+
+  .resource-type {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 0.8rem;
+  }
+
+  .resource-name {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .resource-contact {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .resource-desc {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.5);
+    line-height: 1.6;
+  }
+
+  /* ═══════════════════════════════
+     RECOGNITION
+  ═══════════════════════════════ */
+  #recognition {
+    background: var(--cream);
+    padding: 5rem 3.5rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .recognition-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .recognition-left {}
+
+  .recognition-org {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .recognition-year {
+    font-family: 'Lora', serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  .recognition-event {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--dark-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .recognition-right {
+    border-left: 1px solid var(--border);
+    padding-left: 5rem;
+  }
+
+  .recognition-headline {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.45;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .recognition-body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .recognition-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(109, 46, 70, 0.07);
+    border: 1px solid rgba(109, 46, 70, 0.15);
+    padding: 0.45rem 1rem;
+    border-radius: 2px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════
+     CTA
+  ═══════════════════════════════ */
+  #cta {
+    background: var(--dark);
+    padding: 7rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cta::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(232, 149, 109, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-left {}
+
+  .cta-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .cta-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .cta-body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.55);
+    line-height: 1.8;
+  }
+
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .cta-option {
+    border: 1px solid rgba(250, 244, 240, 0.1);
+    padding: 1.6rem 2rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 244, 240, 0.03);
+  }
+
+  .cta-option:hover {
+    background: rgba(232, 149, 109, 0.08);
+    border-color: rgba(232, 149, 109, 0.35);
+  }
+
+  .cta-option-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .cta-option-title {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--cream);
+  }
+
+  .cta-option-arrow {
+    font-size: 1.2rem;
+    color: rgba(250, 244, 240, 0.2);
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .cta-option:hover .cta-option-arrow {
+    transform: translateX(5px);
+    color: var(--accent);
+  }
+
+  /* ═══════════════════════════════
+     FOOTER
+  ═══════════════════════════════ */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(250, 244, 240, 0.08);
+    padding: 3rem 3.5rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .footer-logo-text {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-tagline {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.35);
+    margin-top: 0.2rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(250, 244, 240, 0.4);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  .footer-copy {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: rgba(250, 244, 240, 0.25);
+  }
+
+  /* ═══════════════════════════════
+     SCROLL ANIMATIONS
+  ═══════════════════════════════ */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+
+  /* ═══════════════════════════════
+     DIVIDER
+  ═══════════════════════════════ */
+  .hand-divider {
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+  }
+
+  .hand-divider svg {
+    opacity: 0.3;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    <span class="nav-logo-text">HIFADHWI</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#mission">Notre mission</a></li>
+    <li><a href="#actions">Nos actions</a></li>
+    <li><a href="#recognition">Reconnaissance</a></li>
+    <li><a href="#emergency">Urgence</a></li>
+    <li><a href="#cta" class="nav-cta">Soutenir</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Depuis 2012 aux Comores</p>
+    <h1 class="hero-title">
+      Protéger les femmes<br>et les enfants<br>des <em>Comores</em>
+    </h1>
+    <p class="hero-sub">
+      HIFADHWI œuvre chaque jour pour que chaque femme, chaque enfant des trois îles puisse vivre dans la dignité et la sécurité — loin des violences, accompagné·e vers la justice.
+    </p>
+    <div class="hero-actions">
+      <a href="#actions" class="btn-primary">
+        Nos actions
+        <span>→</span>
+      </a>
+      <a href="#mission" class="btn-ghost">
+        En savoir plus <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-floats">
+      <div class="float-circle"></div>
+      <div class="float-circle"></div>
+      <div class="float-circle"></div>
+    </div>
+
+    <svg class="hero-pattern" viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1.5" fill="rgba(250,244,240,0.6)"/>
+        </pattern>
+      </defs>
+      <rect width="600" height="800" fill="url(#dots)"/>
+      <circle cx="300" cy="250" r="180" fill="none" stroke="rgba(250,244,240,0.15)" stroke-width="1"/>
+      <circle cx="300" cy="250" r="120" fill="none" stroke="rgba(250,244,240,0.1)" stroke-width="0.5"/>
+      <circle cx="300" cy="250" r="240" fill="none" stroke="rgba(250,244,240,0.08)" stroke-width="0.5"/>
+    </svg>
+
+    <div class="hero-visual-text">
+      <span class="hero-big-word">HIFADHWI</span>
+      <div style="height: 3rem;"></div>
+      <div class="hero-quote-block">
+        <p class="hero-quote-text">
+          « Le silence protège les agresseurs. Nous, nous donnons la parole aux victimes. »
+        </p>
+        <span class="hero-quote-attr">Fondatrice, HIFADHWI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS — EDITORIAL ═══ -->
+<section id="stats">
+  <div class="stats-header fade-in">
+    <p class="stats-label">Notre impact en chiffres</p>
+    <h2 class="stats-title">Dix ans d'engagement, des vies transformées</h2>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-block fade-in fade-in-delay-1">
+      <div class="stat-number">
+        <span class="countup" data-target="500">0</span><span class="stat-suffix">+</span>
+      </div>
+      <div class="stat-context">
+        <strong>Femmes accompagnées</strong>
+        Des survivantes qui ont trouvé chez nous écoute, soutien juridique et chemin vers la dignité.
+      </div>
+    </div>
+
+    <div class="stat-block fade-in fade-in-delay-2">
+      <div class="stat-number">
+        <span class="countup" data-target="1200">0</span><span class="stat-suffix">+</span>
+      </div>
+      <div class="stat-context">
+        <strong>Personnes sensibilisées</strong>
+        Communautés, écoles, institutions — le changement commence par la parole.
+      </div>
+    </div>
+
+    <div class="stat-block fade-in fade-in-delay-3">
+      <div class="stat-number">
+        <span class="countup" data-target="3">0</span>
+      </div>
+      <div class="stat-context">
+        <strong>Îles couvertes</strong>
+        Grande Comore, Anjouan et Mohéli — nos actions couvrent l'ensemble de l'archipel.
+      </div>
+    </div>
+
+    <div class="stat-block fade-in fade-in-delay-4">
+      <div class="stat-number">
+        <span class="countup" data-target="10">0</span><span class="stat-suffix">+</span>
+      </div>
+      <div class="stat-context">
+        <strong>Années d'action</strong>
+        Une décennie de terrain, de plaidoyer et de présence aux côtés des plus vulnérables.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MISSION ═══ -->
+<section id="mission">
+  <div class="mission-quote fade-in">
+    <p class="mission-quote-text">
+      Aux Comores, la violence faite aux femmes reste souvent invisible — enfouie dans la honte, le silence, les traditions mal interprétées. HIFADHWI existe pour que cette invisibilité prenne fin.
+    </p>
+    <span class="mission-quote-attr">— Déclaration de fondation, 2012</span>
+  </div>
+
+  <div class="mission-content fade-in fade-in-delay-2">
+    <p class="section-eyebrow">Notre mission</p>
+    <h2 class="section-title">Transformer la société comorienne de l'intérieur</h2>
+    <p class="section-body">
+      Nous ne sommes pas une organisation de secours d'urgence. Nous sommes un mouvement de changement. À travers la sensibilisation, le droit et la diplomatie internationale, nous travaillons sur les causes profondes des violences basées sur le genre.
+    </p>
+    <p class="section-body">
+      Chaque femme que nous accompagnons, chaque communauté que nous sensibilisons, chaque plaidoyer que nous portons devant les instances internationales — tout cela construit, pierre par pierre, une Comores plus juste.
+    </p>
+
+    <div class="mission-values">
+      <div class="mission-value">Dignité inconditionnelle pour chaque personne</div>
+      <div class="mission-value">Justice accessible aux plus vulnérables</div>
+      <div class="mission-value">Ancrage culturel dans chaque action</div>
+      <div class="mission-value">Indépendance et intégrité sans compromis</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACTIONS ═══ -->
+<section id="actions">
+  <div class="actions-header fade-in">
+    <div class="actions-title-group">
+      <p class="section-eyebrow">Ce que nous faisons</p>
+      <h2 class="section-title">Nos domaines d'action</h2>
+    </div>
+    <p class="actions-subtitle">
+      Quatre axes complémentaires pour un changement durable et systémique.
+    </p>
+  </div>
+
+  <div class="action-rows">
+    <div class="action-row fade-in">
+      <div class="action-num">01</div>
+      <div class="action-body">
+        <span class="action-tag">Terrain</span>
+        <h3 class="action-name">Sensibilisation communautaire</h3>
+        <p class="action-desc">Ateliers dans les villages, les écoles et les mosquées. Parce que la prévention commence dans les familles, avant que la violence ne survienne.</p>
+      </div>
+      <span class="action-arrow">→</span>
+    </div>
+
+    <div class="action-row fade-in fade-in-delay-1">
+      <div class="action-num">02</div>
+      <div class="action-body">
+        <span class="action-tag">Juridique</span>
+        <h3 class="action-name">Accompagnement & soutien aux victimes</h3>
+        <p class="action-desc">Écoute, orientation, soutien psychologique et accès à la justice pour les femmes et les enfants victimes de violence domestique ou sexuelle.</p>
+      </div>
+      <span class="action-arrow">→</span>
+    </div>
+
+    <div class="action-row fade-in fade-in-delay-2">
+      <div class="action-num">03</div>
+      <div class="action-body">
+        <span class="action-tag">Plaidoyer</span>
+        <h3 class="action-name">Conférences & plaidoyer national</h3>
+        <p class="action-desc">Dialogues avec les autorités comoriens, la société civile et les médias pour faire évoluer les lois et les pratiques au niveau national.</p>
+      </div>
+      <span class="action-arrow">→</span>
+    </div>
+
+    <div class="action-row fade-in fade-in-delay-3">
+      <div class="action-num">04</div>
+      <div class="action-body">
+        <span class="action-tag">International</span>
+        <h3 class="action-name">Plaidoyer international & diplomatie</h3>
+        <p class="action-desc">Représentation aux Nations Unies, participation à l'Examen Périodique Universel, et construction d'alliances mondiales pour les droits humains aux Comores.</p>
+      </div>
+      <span class="action-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EMERGENCY ═══ -->
+<section id="emergency">
+  <div class="emergency-inner">
+    <div class="emergency-header fade-in">
+      <div class="emergency-pulse"></div>
+      <h2 class="emergency-title">Vous êtes en danger ?</h2>
+    </div>
+
+    <p class="emergency-sub fade-in">
+      Si vous ou quelqu'un que vous connaissez est victime de violences, ces ressources sont disponibles maintenant. Vous n'êtes pas seule.
+    </p>
+
+    <div class="emergency-resources">
+      <div class="resource-card fade-in fade-in-delay-1">
+        <p class="resource-type">Ligne d'écoute</p>
+        <h3 class="resource-name">HIFADHWI Direct</h3>
+        <p class="resource-contact">+269 321 00 00</p>
+        <p class="resource-desc">Disponible 7j/7 de 7h à 22h. Écoute confidentielle, accompagnement et orientation vers les structures d'aide.</p>
+      </div>
+
+      <div class="resource-card fade-in fade-in-delay-2">
+        <p class="resource-type">Urgences nationales</p>
+        <h3 class="resource-name">Gendarmerie nationale</h3>
+        <p class="resource-contact">17</p>
+        <p class="resource-desc">Numéro d'urgence de la gendarmerie, disponible 24h/24. En cas de danger immédiat ou de violence en cours.</p>
+      </div>
+
+      <div class="resource-card fade-in fade-in-delay-3">
+        <p class="resource-type">Soutien psychologique</p>
+        <h3 class="resource-name">Cellule d'écoute DSFE</h3>
+        <p class="resource-contact">+269 773 12 45</p>
+        <p class="resource-desc">Direction de la Solidarité, de la Famille et des Élèves — prise en charge psychologique et sociale des victimes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RECOGNITION ═══ -->
+<section id="recognition">
+  <div class="recognition-inner">
+    <div class="recognition-left fade-in">
+      <p class="recognition-org">Nations Unies</p>
+      <div class="recognition-year">2023</div>
+      <p class="recognition-event">Examen Périodique Universel — Genève</p>
+    </div>
+
+    <div class="recognition-right fade-in fade-in-delay-2">
+      <h2 class="recognition-headline">
+        Une voix comorienne portée devant le Conseil des droits de l'homme des Nations Unies
+      </h2>
+      <p class="recognition-body">
+        En 2023, HIFADHWI a contribué au processus d'Examen Périodique Universel (EPU) des Nations Unies concernant les Comores. Nos représentantes ont présenté un rapport documenté sur la situation des femmes et des enfants face aux violences, et formulé des recommandations concrètes aux autorités comoriennes devant la communauté internationale.
+      </p>
+      <p class="recognition-body">
+        Cette reconnaissance internationale valide dix ans de travail de terrain et ouvre de nouvelles portes pour le plaidoyer en faveur des droits des plus vulnérables aux Comores.
+      </p>
+      <span class="recognition-badge">
+        ★ Reconnue au niveau international
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-left fade-in">
+      <p class="cta-eyebrow">Rejoignez le combat</p>
+      <h2 class="cta-title">Soutenez notre combat pour la dignité</h2>
+      <p class="cta-body">
+        HIFADHWI vit grâce à la solidarité de personnes comme vous. Chaque contribution, petite ou grande, permet de continuer d'accompagner des femmes et des enfants vers la justice et la sécurité.
+      </p>
+    </div>
+
+    <div class="cta-right fade-in fade-in-delay-2">
+      <a href="#" class="cta-option">
+        <div>
+          <p class="cta-option-label">Don financier</p>
+          <p class="cta-option-title">Faire un don en ligne</p>
+        </div>
+        <span class="cta-option-arrow">→</span>
+      </a>
+
+      <a href="#" class="cta-option">
+        <div>
+          <p class="cta-option-label">Bénévolat</p>
+          <p class="cta-option-title">Devenir bénévole</p>
+        </div>
+        <span class="cta-option-arrow">→</span>
+      </a>
+
+      <a href="#" class="cta-option">
+        <div>
+          <p class="cta-option-label">Partenariat</p>
+          <p class="cta-option-title">Proposer un partenariat</p>
+        </div>
+        <span class="cta-option-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg style="width:24px;height:24px;fill:var(--accent);" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      <div>
+        <div class="footer-logo-text">HIFADHWI</div>
+        <div class="footer-tagline">Protection des femmes et enfants des Comores</div>
+      </div>
+    </div>
+
+    <ul class="footer-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#actions">Actions</a></li>
+      <li><a href="#recognition">Reconnaissance</a></li>
+      <li><a href="#emergency">Urgence</a></li>
+      <li><a href="mailto:contact@hifadhwi.org">Contact</a></li>
+    </ul>
+
+    <p class="footer-copy">© 2024 HIFADHWI — Moroni, Comores</p>
+  </div>
+</footer>
+
+<script>
+  /* ── Navbar scroll ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ── Count-up animation ── */
+  function easeOutExpo(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  }
+
+  function animateCountUp(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1800;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutExpo(progress);
+      const current = Math.round(eased * target);
+      el.textContent = current.toLocaleString('fr-FR');
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  /* ── Intersection Observer for fade-ins and count-ups ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+
+        /* trigger count-ups inside this element */
+        entry.target.querySelectorAll('.countup').forEach(animateCountUp);
+
+        /* if it IS a countup */
+        if (entry.target.classList.contains('countup')) {
+          animateCountUp(entry.target);
+        }
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ── Also observe stat blocks directly for count-up ── */
+  document.querySelectorAll('.stat-block').forEach(block => {
+    const innerObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.countup').forEach(animateCountUp);
+          innerObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    innerObs.observe(block);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const lr = require\\('lucide-react'\\); const keys = Object.keys\\(lr\\).filter\\(k => /face|insta|social|share|twitter|x$/i.test\\(k\\)\\); console.log\\(keys\\)\")",
+      "Bash(git check-ignore *)",
+      "Bash(git -C \"c:\\\\Users\\\\7MAKSACOD PC\\\\Downloads\\\\hifadhwi\" status --short)",
+      "Bash(git push *)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(pip3 install *)",
+      "Bash(git checkout *)",
+      "Bash(git reset *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

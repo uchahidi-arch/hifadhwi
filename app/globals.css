@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --primary: #6D2E46;
+  --primary-light: #9B4A68;
+  --accent: #E8956D;
+  --accent-light: #F2B898;
+  --cream: #FAF4F0;
+  --cream-dark: #F0E6DF;
+  --dark: #1C1410;
+  --dark-mid: #3A2820;
+  --muted: #8C6E62;
+  --border: rgba(109, 46, 70, 0.15);
+  --white: #FFFCFA;
+  --text: #2C1F18;
+  --text-muted: #7A6058;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--cream);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.6;
+}
+
+h1, h2, h3, h4 { font-family: 'Lora', serif; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 3.5rem; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--primary);
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+.btn-primary:hover { background: var(--dark); transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+.btn-ghost .arrow { transition: transform 0.25s ease; }
+.btn-ghost:hover .arrow { transform: translateX(4px); }
+
+.btn-accent {
+  font-family: 'Nunito', sans-serif;
+  background: var(--accent);
+  color: var(--cream);
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+.btn-accent:hover { background: #d4804f; transform: translateY(-1px); }
+
+.btn-outline {
+  font-family: 'Nunito', sans-serif;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  padding: 0.78rem 1.8rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+  display: inline-block;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-outline:hover { background: var(--primary); color: var(--cream); }
+
+/* ── SECTION UTILITIES ── */
+.section-eyebrow {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.section-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.section-body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 1.2rem;
+}
+
+/* ── FADE IN ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+
+/* ── MISC UTILITIES ── */
+.text-primary { color: var(--primary); }
+.text-accent { color: var(--accent); }
+.text-muted { color: var(--muted); }
+.bg-cream { background: var(--cream); }
+.bg-dark { background: var(--dark); }
+.bg-primary { background: var(--primary); }
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.75rem;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 6px 24px rgba(109,46,70,0.07); }
+.tag {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+}
+.divider { width: 48px; height: 2px; background: var(--accent); margin: 1rem 0 1.5rem; }
+.section { padding: 6rem 0; }

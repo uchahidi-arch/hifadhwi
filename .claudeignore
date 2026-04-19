@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Type declarations (auto-generated)
+next-env.d.ts
+
+# OS / editor artifacts
+.DS_Store
+*.log
