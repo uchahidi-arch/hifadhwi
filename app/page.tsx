@@ -261,22 +261,49 @@ export default function Home() {
         }
         .stat-context {
           font-family: 'Nunito', sans-serif;
-          font-size: 0.88rem;
+          font-size: 0.94rem;
           color: var(--muted);
           line-height: 1.6;
-          max-width: 340px;
+          max-width: 420px;
         }
         .stat-context strong {
           font-weight: 700;
           color: var(--dark-mid);
           display: block;
           margin-bottom: 0.3rem;
-          font-size: 0.92rem;
+          font-size: 0.98rem;
         }
         .stat-inline-num {
           font-weight: 700;
-          color: var(--dark-mid);
-          font-size: 1.25em;
+          color: #2C0808;
+          font-size: 1.45em;
+        }
+        .stat-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin-top: 1.8rem;
+        }
+        .stat-btn {
+          font-family: 'Nunito', sans-serif;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--primary);
+          text-decoration: none;
+          padding: 0.5rem 1.1rem;
+          border: 1.5px solid rgba(109, 46, 70, 0.35);
+          border-radius: 2px;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+        .stat-btn:hover {
+          background: var(--primary);
+          border-color: var(--primary);
+          color: var(--cream);
         }
 
         /* ── MISSION ── */
@@ -722,7 +749,26 @@ export default function Home() {
         @media (max-width: 900px) {
           #hero { grid-template-columns: 1fr; }
           .hero-right { display: none; }
-          .hero-left { padding: 8rem 2rem 4rem; }
+          .hero-left {
+            padding: 8rem 2rem 4rem;
+            background: var(--primary);
+            background-image: url('/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+          }
+          .hero-left::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(109, 46, 70, 0.82);
+            z-index: 0;
+          }
+          .hero-left > * { position: relative; z-index: 1; }
+          .hero-eyebrow { color: var(--accent-light); }
+          .hero-title { color: var(--cream); }
+          .hero-title em { color: var(--accent-light); }
+          .hero-sub { color: rgba(250, 244, 240, 0.75); }
           #mission { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
           .stats-grid { grid-template-columns: repeat(2, 1fr); }
           #actions, #emergency, #recognition, #cta { padding: 4rem 2rem; }
@@ -736,6 +782,22 @@ export default function Home() {
         }
         @media (max-width: 600px) {
           .container { padding: 0 1.5rem; }
+          .stats-grid {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 0;
+          }
+          .stats-grid::-webkit-scrollbar { display: none; }
+          .stat-block {
+            min-width: 80vw;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            border-right: 1px solid rgba(109, 46, 70, 0.12);
+          }
+          .stat-block:last-child { border-right: none; }
         }
       `}</style>
 
@@ -808,9 +870,7 @@ export default function Home() {
           {[
             {
               question: "QUI SOMMES-NOUS ?",
-              label: null,
-              desc: null,
-              custom: (
+              content: (
                 <p className="stat-context">
                   HIFADHWI a sensibilisé plus de{" "}
                   <span className="stat-inline-num"><CountUp target={1200} /></span>{" "}
@@ -819,18 +879,41 @@ export default function Home() {
                   îles des Comores — Grande Comore, Anjouan et Mohéli — dans la lutte contre toutes les formes de violence basée sur le genre.
                 </p>
               ),
+              links: [{ label: "Notre mission", href: "/a-propos" }],
             },
-            { question: "QUE FAISONS-NOUS ?", label: "Personnes sensibilisées", desc: "Communautés, écoles, institutions — le changement commence par la parole.", custom: null },
-            { question: "COMMENT AIDER ?", label: "Années d'action", desc: "Près de 15 ans de terrain, de plaidoyer et de présence aux côtés des plus vulnérables depuis 2012.", custom: null },
+            {
+              question: "QUE FAISONS-NOUS ?",
+              content: (
+                <p className="stat-context">
+                  Depuis près de <span className="stat-inline-num"><CountUp target={15} /></span> ans, HIFADHWI a accompagné plus de{" "}
+                  <span className="stat-inline-num"><CountUp target={500} /></span> femmes et enfants à travers la sensibilisation, l&apos;accompagnement juridique et le plaidoyer international — jusqu&apos;à une déclaration officielle devant l&apos;ONU en <span className="stat-inline-num">2023</span>.
+                </p>
+              ),
+              links: [{ label: "Nos actions", href: "/nos-actions" }],
+            },
+            {
+              question: "COMMENT AIDER ?",
+              content: (
+                <p className="stat-context">
+                  Chaque geste compte — rejoignez notre combat en faisant un don, en devenant bénévole ou en proposant un partenariat. Ensemble, nous pouvons offrir à chaque femme et enfant des Comores la protection qu&apos;ils méritent.
+                </p>
+              ),
+              links: [
+                { label: "Nous soutenir", href: "/nous-soutenir" },
+                { label: "Contact", href: "/contact" },
+              ],
+            },
           ].map((s, i) => (
             <div key={i} className={`stat-block fade-in fade-in-delay-${i + 1}`}>
               <div className="stat-number">{s.question}</div>
-              {s.custom ?? (
-                <div className="stat-context">
-                  <strong>{s.label}</strong>
-                  {s.desc}
-                </div>
-              )}
+              {s.content}
+              <div className="stat-links">
+                {s.links.map((l, j) => (
+                  <Link key={j} href={l.href} className="stat-btn">
+                    {l.label} →
+                  </Link>
+                ))}
+              </div>
             </div>
           ))}
         </div>
