@@ -178,6 +178,7 @@ export default function Home() {
           text-transform: uppercase;
           color: var(--accent-light);
         }
+        .hero-mobile-ong { display: none; }
 
         /* ── STATS ── */
         #stats {
@@ -766,9 +767,19 @@ export default function Home() {
           }
           .hero-left > * { position: relative; z-index: 1; }
           .hero-eyebrow { color: var(--accent-light); }
-          .hero-title { color: var(--cream); }
-          .hero-title em { color: var(--accent-light); }
-          .hero-sub { color: rgba(250, 244, 240, 0.75); }
+          .hero-title { display: none; }
+          .hero-sub { display: none; }
+          .hero-mobile-ong {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+          }
+          .hero-mobile-ong-top {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+          }
           #mission { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
           .stats-grid { grid-template-columns: repeat(2, 1fr); }
           #actions, #emergency, #recognition, #cta { padding: 4rem 2rem; }
@@ -792,12 +803,10 @@ export default function Home() {
           }
           .stats-grid::-webkit-scrollbar { display: none; }
           .stat-block {
-            min-width: 80vw;
+            width: 75vw;
             flex-shrink: 0;
             scroll-snap-align: start;
-            border-right: 1px solid rgba(109, 46, 70, 0.12);
           }
-          .stat-block:last-child { border-right: none; }
         }
       `}</style>
 
@@ -807,6 +816,13 @@ export default function Home() {
       <section id="hero">
         <div className="hero-left">
           <p className="hero-eyebrow">Depuis 2012 aux Comores</p>
+          <div className="hero-mobile-ong">
+            <div className="hero-mobile-ong-top">
+              <span className="hero-ong-label">ONG</span>
+              <Image src="/logo.png" alt="HIFADHWI" width={80} height={80} style={{ objectFit: "contain", opacity: 0.9 }} unoptimized />
+            </div>
+            <span className="hero-ong-name">HIFADHWI</span>
+          </div>
           <h1 className="hero-title">
             Protéger les femmes<br />et les enfants<br />des <em>Comores</em>
           </h1>
@@ -817,8 +833,8 @@ export default function Home() {
             <Link href="/nos-actions" className="btn-primary">
               Nos actions <span>→</span>
             </Link>
-            <Link href="/a-propos" className="btn-ghost">
-              En savoir plus <span className="arrow">→</span>
+            <Link href="/nous-soutenir" className="btn-ghost hero-btn-soutenir">
+              Nous soutenir <span className="arrow">→</span>
             </Link>
           </div>
         </div>
@@ -895,7 +911,7 @@ export default function Home() {
               question: "COMMENT AIDER ?",
               content: (
                 <p className="stat-context">
-                  Chaque geste compte — rejoignez notre combat en faisant un don, en devenant bénévole ou en proposant un partenariat. Ensemble, nous pouvons offrir à chaque femme et enfant des Comores la protection qu&apos;ils méritent.
+                  Chaque geste compte — que ce soit un don, du temps offert en bénévolat ou un partenariat institutionnel. Votre soutien permet à HIFADHWI de continuer d&apos;accompagner les femmes et les enfants des trois îles des Comores vers la justice, la dignité et la sécurité qu&apos;ils méritent.
                 </p>
               ),
               links: [

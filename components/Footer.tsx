@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const actions = [
-  { eyebrow: "Faire un geste", title: "Don financier", href: "/soutien" },
+  { eyebrow: "Faire un geste", title: "Don financier", href: "/nous-soutenir" },
   { eyebrow: "Donner de son temps", title: "Bénévolat", href: "/contact" },
   { eyebrow: "Travailler ensemble", title: "Partenariat", href: "/contact" },
 ];
